@@ -4,7 +4,7 @@
 #from sklearn.ensemble import RandomForestRegressor
 
 # Own
-from utils import write_yaml
+from ..utils import write_yaml
 
 path_model = "../models/model_config.yaml"
 
