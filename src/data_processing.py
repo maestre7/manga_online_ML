@@ -112,7 +112,7 @@ class Data_Processing():
         
 
 if __name__ == '__main__':
-    logging.config.fileConfig("../log/config/logger.ini", defaults={'filename': '../log/mylog.log'},disable_existing_loggers=False)
+    logging.config.fileConfig("./log/config/logger.ini", defaults={'filename': './log/mylog.log'}, disable_existing_loggers=False)
     logger = logging.getLogger(__name__)
     
     app = Data_Processing(path_in_dict, path_out_str)

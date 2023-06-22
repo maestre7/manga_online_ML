@@ -1,7 +1,17 @@
 path_in_dict = {
     "book": "../data/raw/dataset_4.csv",
     "chapters": "../data/raw/dataset_chapters.csv",
-    "multy_chapters": "../data/raw/dataset_multy_chapters.csv"
+    "multy_chapters": "../data/raw/dataset_multy_chapters.csv",
+    "params": {
+        "light": "../models/light/model_config.yaml",
+        "medium": "../models/medium/model_config.yaml",
+        "heavy": "../models/heavy/model_config.yaml",
+    },
+    "score": {
+        "light": "../models/light/score.yaml",
+        "medium": "../models/medium/score.yaml",
+        "heavy": "../models/heavy/score.yaml",
+    }
 }
 
 path_out_str = "../data/processed"
