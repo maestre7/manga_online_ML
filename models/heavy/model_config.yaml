@@ -1,14 +1,24 @@
 en:
-  regressor__alpha: 0.1
-  regressor__l1_ratio: 0.3
-  regressor__max_iter: 1000
+  regressor__alpha:
+  - 0.1
+  regressor__l1_ratio:
+  - 0.3
+  regressor__max_iter:
+  - 1000
 plr:
-  poli__degree: 2
+  poli__degree:
+  - 2
 rfr:
-  regressor__max_depth: 13
-  regressor__min_samples_leaf: 3
-  regressor__n_estimators: 200
+  regressor__max_depth:
+  - 13
+  regressor__min_samples_leaf:
+  - 3
+  regressor__n_estimators:
+  - 200
 svr:
-  regressor__C: 2
-  regressor__epsilon: 0.01
-  regressor__kernel: rbf
+  regressor__C:
+  - 2
+  regressor__epsilon:
+  - 0.01
+  regressor__kernel:
+  - rbf

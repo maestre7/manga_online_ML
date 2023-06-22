@@ -30,8 +30,10 @@ genre_list = ['Magia', 'Mecha', 'Demonios',
 
 book_status_dict = {'FINALIZADO': 0, 'PUBLICÁNDOSE': 1, 'PAUSADO': 2, 'CANCELADO': 3}
 
-light_list = ['score', 'read', 'pending', 'following', 'favorite', 'have', 'abandoned']
-medium_list = ['demography_score', 'type_score', 'score', 'read', 'book_status_score', 
+data_columns = {
+    "light" : ['score', 'read', 'pending', 'following', 'favorite', 'have', 'abandoned'],
+    "medium" : ['demography_score', 'type_score', 'score', 'read', 'book_status_score', 
                                       'pending', 'following', 'favorite', 'have', 'abandoned', 
-                                      'chapters_count']
-heavy_list = ['synopsis', 'demography', 'type', 'name', 'genre', 'book_status', 'book_cover', 'uuid']
+                                      'chapters_count'],
+    "heavy" : ['synopsis', 'demography', 'type', 'name', 'genre', 'book_status', 'book_cover', 'uuid']
+}

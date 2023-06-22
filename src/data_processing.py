@@ -27,13 +27,17 @@ class Data_Processing():
         self.path_in = path_in 
         self.path_out = path_out
 
-        self.init_processing()
-        self.chapters_process()
-        self.genre_process()
-        self.type_and_demography_to_score()
-        self.book_status_to_score()
-        self.data_out()
-        bee()
+        try:
+            self.init_processing()
+            self.chapters_process()
+            self.genre_process()
+            self.type_and_demography_to_score()
+            self.book_status_to_score()
+            self.data_out()
+        except Exception as err:
+            print(err)
+        finally:
+            bee()
 
     def init_processing(self):
         """
@@ -44,7 +48,9 @@ class Data_Processing():
             self.chapters_df = pd.read_csv(self.path_in["chapters"], index_col="Unnamed: 0")
             self.multy_chapters_df = pd.read_csv(self.path_in["multy_chapters"], index_col="Unnamed: 0")
         except Exception as err:
-            logging.exception(f"{__name__}-init_processing: {err}")
+            msn = f"{__name__}-init_processing: {err}"
+            logging.exception(msn)
+            raise msn
 
     def chapters_process(self):
         """
@@ -57,7 +63,9 @@ class Data_Processing():
             self.data_df = self.book_df.join(chapters_count_df, on='uuid')
             self.data_df['chapters_count'] = self.data_df['chapters_count'].fillna(0)
         except Exception as err:
-            logging.exception(f"{__name__}-chapters_process: {err}")
+            msn = f"{__name__}-chapters_process: {err}"
+            logging.exception(msn)
+            raise msn
 
     def genre_process(self):
         """
@@ -68,7 +76,9 @@ class Data_Processing():
                 #self.data_df[genre].where(self.data_df[genre], 1, 0, inplace=True)
                 self.data_df[genre] = self.data_df[genre].replace({ True: 1, False: 0 })
         except Exception as err:
-            logging.exception(f"{__name__}-genre_process: {err}")       
+            msn = f"{__name__}-genre_process: {err}"
+            logging.exception(msn)  
+            raise msn     
 
     def type_and_demography_to_score(self):
         """
@@ -83,7 +93,9 @@ class Data_Processing():
             mean_score_by_demography = self.data_df.groupby('demography')['score'].mean()
             self.data_df['demography_score'] = self.data_df['demography'].map(mean_score_by_demography).fillna(mean_scored)
         except Exception as err:
-            logging.exception(f"{__name__}-type_and_demography_to_score: {err}")
+            msn = f"{__name__}-type_and_demography_to_score: {err}"
+            logging.exception(msn)
+            raise msn
         
     def book_status_to_score(self):
         """
@@ -92,7 +104,9 @@ class Data_Processing():
         try:
             self.data_df['book_status_score'] = self.data_df['book_status'].map(book_status_dict)
         except Exception as err:
-            logging.exception(f"{__name__}-book_status_to_score: {err}")
+            msn = f"{__name__}-book_status_to_score: {err}"
+            logging.exception(msn)
+            raise msn
 
         
     def data_out(self):
@@ -108,7 +122,9 @@ class Data_Processing():
             medium_df.to_csv(Path(f"{path_out_str}/medium.csv"))
             heavy_df.to_csv(Path(f"{path_out_str}/heavy.csv"))
         except Exception as err:
-            logging.exception(f"{__name__}-data_out: {err}")
+            msn = f"{__name__}-data_out: {err}"
+            logging.exception(msn)
+            raise msn
         
 
 if __name__ == '__main__':
