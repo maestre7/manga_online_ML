@@ -8,7 +8,7 @@ import pandas as pd
 #Own
 from utils.utils import bee
 from variables import path_in_dict, path_out_str, genre_list, book_status_dict
-from variables import light_list, medium_list, heavy_list
+from variables import data_columns
 
 
 class Data_Processing():
@@ -30,8 +30,10 @@ class Data_Processing():
         try:
             self.init_processing()
             self.chapters_process()
-            self.genre_process()
+            #self.genre_process()
+            self.genre_score_process()
             self.type_and_demography_to_score()
+            self.tdg_score()
             self.book_status_to_score()
             self.data_out()
         except Exception as err:
@@ -73,10 +75,22 @@ class Data_Processing():
         """
         try:
             for genre in genre_list:
-                #self.data_df[genre].where(self.data_df[genre], 1, 0, inplace=True)
                 self.data_df[genre] = self.data_df[genre].replace({ True: 1, False: 0 })
         except Exception as err:
             msn = f"{__name__}-genre_process: {err}"
+            logging.exception(msn)  
+            raise msn     
+        
+    def genre_score_process(self):
+        """
+        Processes genre data and converts boolean values to mean score.
+        """
+        try:
+            for genre in genre_list:
+                mean_score_by_genre = self.data_df.groupby(genre)['score'].mean()           
+                self.data_df[f'{genre}_score'] = self.data_df[genre].replace({ True: mean_score_by_genre[1], False: 0 })
+        except Exception as err:
+            msn = f"{__name__}-genre_score_process: {err}"
             logging.exception(msn)  
             raise msn     
 
@@ -97,6 +111,26 @@ class Data_Processing():
             logging.exception(msn)
             raise msn
         
+    def mean_row(self, row):
+        try:
+            lst = [e for e in row if e != 0]
+            avg = sum(lst) / len(lst)
+            return avg
+        except Exception as err:
+            msn = f"{__name__}-mean_row: {err}"
+            logging.exception(msn)
+            raise msn
+        
+    def tdg_score(self):
+        try:
+            score_df = self.data_df[[col for col in self.data_df.columns if 'score' in col]]
+            self.data_df["tdg"] = score_df.apply(self.mean_row, axis=1);
+        except Exception as err:
+            msn = f"{__name__}-tdg_score: {err}"
+            logging.exception(msn)
+            raise msn
+
+        
     def book_status_to_score(self):
         """
         Maps book status to corresponding scores.
@@ -114,9 +148,9 @@ class Data_Processing():
         Writes processed data to output files.
         """
         try:
-            light_df = self.data_df[light_list]
-            medium_df = self.data_df[medium_list]
-            heavy_df = self.data_df.drop(heavy_list, axis=1)
+            light_df = self.data_df[data_columns["light"]]
+            medium_df = self.data_df[data_columns["medium"]]
+            heavy_df = self.data_df.drop(data_columns["heavy"], axis=1)
 
             light_df.to_csv(Path(f"{path_out_str}/light.csv"))
             medium_df.to_csv(Path(f"{path_out_str}/medium.csv"))

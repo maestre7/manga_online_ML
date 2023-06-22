@@ -2,7 +2,7 @@ en:
   regressor__alpha:
   - 0.1
   regressor__l1_ratio:
-  - 0.3
+  - 0.9
   regressor__max_iter:
   - 1000
 plr:
@@ -10,11 +10,13 @@ plr:
   - 2
 rfr:
   regressor__max_depth:
-  - 13
+  - 21
+  regressor__max_features:
+  - 60
   regressor__min_samples_leaf:
-  - 3
+  - 1
   regressor__n_estimators:
-  - 200
+  - 150
 svr:
   regressor__C:
   - 2

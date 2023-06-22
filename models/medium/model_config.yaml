@@ -2,7 +2,7 @@ en:
   regressor__alpha:
   - 0.1
   regressor__l1_ratio:
-  - 0.3
+  - 0.9
   regressor__max_iter:
   - 1000
 plr:

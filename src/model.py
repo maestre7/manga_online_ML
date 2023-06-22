@@ -13,7 +13,7 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import train_test_split 
 
 # Own
-from utils.utils import read_yaml, write_pickle, bee
+from utils.utils import read_yaml, write_yaml, write_pickle, bee
 from variables import path_in_dict, data_columns
 
 
@@ -32,7 +32,8 @@ class Model():
         except Exception as err:
             print(err)
         finally:
-            bee()
+            #bee()
+            pass
 
     def select_type_model(self):
         score_dict = {}
@@ -53,6 +54,7 @@ class Model():
         try:
             data = read_yaml(path_in_dict["params"][self.type_df])
             self.params = data[self.model]
+            write_yaml("../models/model_config.yaml", self.params)
         except Exception as err:
             msn = f"{__name__}-load_model: {err}"
             logger.exception(msn)
@@ -80,7 +82,7 @@ class Model():
             data = pd.read_csv(f"../data/processed/{self.type_df}.csv")
 
             if self.type_df == "heavy":
-                X = data.drop(data_columns[self.type_df])
+                X = data.drop(["score"], axis=1)
             else:
                 X = data[data_columns[self.type_df]]
 
