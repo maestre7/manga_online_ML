@@ -1,8 +1,10 @@
 
 from pathlib import Path
+from time import sleep
+from winsound import Beep
 import logging
-import yaml
 import pickle
+import yaml
 
 logger = logging.getLogger(__name__)
 
@@ -87,3 +89,13 @@ def write_pickle(file_path: str, data: object):
     except (FileNotFoundError, IOError, pickle.PickleError) as err:
         logger.exception(f"Failed to write Pickle file {file_path}: {err}")
         return False
+
+
+def bee(r = 3, f = 2500, d = 1000, p = 1):
+    try:
+        for n in range(0,r):
+            Beep(f, d)
+            sleep(p)
+    except Exception as err:
+        logger.exception(f"bee: {err}")
+

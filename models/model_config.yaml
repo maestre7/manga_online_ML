@@ -1,34 +1,21 @@
 en:
   regressor__alpha:
   - 0.1
-  - 0.5
-  - 1.0
   regressor__l1_ratio:
   - 0.3
-  - 0.5
-  - 0.7
+plr:
+  poli__degree: 2
 rfr:
   regressor__max_depth:
-  - 5
-  - 10
+  - 13
   regressor__min_samples_split:
-  - 2
-  - 5
-  - 10
+  - 3
   regressor__n_estimators:
-  - 50
-  - 100
   - 200
 svr:
   regressor__C:
-  - 0.1
-  - 1.0
-  - 10.0
+  - 2
   regressor__epsilon:
   - 0.01
-  - 0.1
-  - 0.5
   regressor__kernel:
-  - linear
   - rbf
-  - poly

@@ -1,10 +1,10 @@
 path_in_dict = {
-    "book": "../../data/raw/dataset_4.csv",
-    "chapters": "../../data/raw/dataset_chapters.csv",
-    "multy_chapters": "../../data/raw/dataset_multy_chapters.csv"
+    "book": "../data/raw/dataset_4.csv",
+    "chapters": "../data/raw/dataset_chapters.csv",
+    "multy_chapters": "../data/raw/dataset_multy_chapters.csv"
 }
 
-path_out_str = "../../data/processed"
+path_out_str = "../data/processed"
 
 genre_list = ['Magia', 'Mecha', 'Demonios',
        'Género Bender', 'Realidad Virtual', 'Drama', 'Niños', 'Guerra',

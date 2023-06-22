@@ -6,6 +6,7 @@ import logging.config
 import pandas as pd
 
 #Own
+from utils.utils import bee
 from variables import path_in_dict, path_out_str, genre_list, book_status_dict
 from variables import light_list, medium_list, heavy_list
 
@@ -32,6 +33,7 @@ class Data_Processing():
         self.type_and_demography_to_score()
         self.book_status_to_score()
         self.data_out()
+        bee()
 
     def init_processing(self):
         """
