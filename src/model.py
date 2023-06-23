@@ -17,7 +17,7 @@ from utils.utils import read_yaml, write_yaml, write_pickle, bee
 from variables import path_in_dict, data_columns
 
 
-logger = logging.getLogger(__name__)
+#logger = logging.getLogger(__name__)
 
 
 class Model():
