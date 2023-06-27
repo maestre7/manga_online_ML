@@ -157,3 +157,5 @@ cython_debug/
 /src/other
 pyvenv.cfg
 .log
+.pkl
+.h5

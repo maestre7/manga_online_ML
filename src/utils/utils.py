@@ -90,12 +90,20 @@ def write_pickle(file_path: str, data: object):
         logger.exception(f"Failed to write Pickle file {file_path}: {err}")
         return False
 
+def bee(r: int = 3, f: int = 2500, d: int = 1000, p: float = 1) -> None:
+    """
+    Emits a series of sounds using the Beep function from the winsound library.
 
-def bee(r = 3, f = 2500, d = 1000, p = 1):
-    try:
-        for n in range(0,r):
-            Beep(f, d)
-            sleep(p)
-    except Exception as err:
-        logger.exception(f"bee: {err}")
+    Args:
+        r (int): Number of sound repetitions (default: 3).
+        f (int): Sound frequency in Hz (default: 2500).
+        d (int): Sound duration in milliseconds (default: 1000).
+        p (float): Pause between each sound in seconds (default: 1).
+
+    Returns:
+        None
+    """
+    for n in range(r):
+        Beep(f, d)
+        sleep(p)
 

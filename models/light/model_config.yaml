@@ -1,3 +1,8 @@
+ada:
+  regressor__loss:
+  - linear
+  regressor__n_estimators:
+  - 100
 en:
   regressor__alpha:
   - 1.0
