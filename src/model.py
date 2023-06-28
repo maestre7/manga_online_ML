@@ -42,7 +42,8 @@ class Model():
                 data = read_yaml(path)
                 if data:
                     for model, score in data.items():
-                        score_dict[f"{tipe_df}_{model}"] = score["MAE"]
+                        if model != "rnn":
+                            score_dict[f"{tipe_df}_{model}"] = score["MAE"]
             type_model = sorted(score_dict.items(), key=lambda x:x[1])[0][0]
             self.type_df, self.model = type_model.split("_")
         except Exception as err:
