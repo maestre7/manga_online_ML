@@ -33,7 +33,7 @@ def load_score():
         score = {}
         for type_data, path in score_path.items():
             data = read_yaml(path)
-            if data:
+            if data and type_data != "MAPE":
                 score[type_data] = data
 
         light = pd.DataFrame(score["light"])
