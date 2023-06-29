@@ -33,16 +33,19 @@ def load_score():
         score = {}
         for type_data, path in score_path.items():
             data = read_yaml(path)
-            if data and type_data != "MAPE":
+            if data:
                 score[type_data] = data
 
         light = pd.DataFrame(score["light"])
+        light.drop("MAPE", inplace=True)
         light.fillna(0, inplace=True)
 
         medium = pd.DataFrame(score["medium"])
+        medium.drop("MAPE", inplace=True)
         medium.fillna(0, inplace=True)
 
         heavy = pd.DataFrame(score["heavy"])
+        heavy.drop("MAPE", inplace=True)
         heavy.fillna(0, inplace=True)
 
         return light, medium, heavy
@@ -57,6 +60,9 @@ st.set_page_config(page_title="Cómics Asiáticos", page_icon="☢️", layout="
 # Cargamos el Dataset con el que vamos a trabajar
 heavy = pd.read_csv('../data/processed/heavy.csv', index_col="Unnamed: 0")
 
+# Cargamos el Dataset con el que vamos a trabajar
+original = pd.read_csv('../data/raw/dataset_4.csv', index_col="Unnamed: 0")
+
 #Ponemos un titulo
 st.title("Cómic Asiático en la Comunidad Fansub Hispanohablante")
 
@@ -66,14 +72,21 @@ menu = st.sidebar.selectbox("Seleccionamos la página", ['Home', 'Filtros', 'Dat
 
 if menu == 'Home':
 
+    st.markdown("### [Presentación](https://tome.app/maestre7/prediccion-de-valoracion-de-comics-asiaticos-para-distribucion-en-paises-hispanohablantes-cljgxjcb11kq9pt3cmq5dipfc)")
+
     st.header('Datos con los que trabajamos')
 
+    if st.checkbox('Mostrar Original'):
+        st.dataframe(original, use_container_width=True)
+    else:
+        st.markdown('El dataset original esta oculto')
+
     if st.checkbox('Mostrar'):
-        heavy
+        st.dataframe(heavy, use_container_width=True)
     else:
         st.markdown('El dataset esta oculto')
 
-    tab1, tab2, tab3 = st.tabs(["Puntuación de modelos", "Aprendizaje del modelos", "Distribución de erorres"])
+    tab1, tab2, tab3, tab4 = st.tabs(["Puntuación de modelos", "Aprendizaje del modelos", "Distribución de erorres", "Resolución"])
 
     with tab1:
         st.subheader("Puntuación de modelos")
@@ -86,7 +99,6 @@ if menu == 'Home':
         st.dataframe(heavy, use_container_width=True)
         
     with tab2:
-
         st.subheader("Aprendizaje del modelos")
         st.text('Light')
         st.image("../notebooks/img/light_learning.png")
@@ -97,7 +109,6 @@ if menu == 'Home':
 
 
     with tab3:
-
         st.subheader('Distribución de erorres')
         st.text('Light')
         st.image("../notebooks/img/light_error.png")
@@ -105,3 +116,7 @@ if menu == 'Home':
         st.image("../notebooks/img/medium_error.png")
         st.text('Heavy')
         st.image("../notebooks/img/heavy_error.png")
+
+    with tab4:
+        st.subheader("Resolución")
+        st.image("../notebooks/img/buy.jpg")
