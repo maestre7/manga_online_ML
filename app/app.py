@@ -76,15 +76,15 @@ if menu == 'Home':
 
     st.header('Datos con los que trabajamos')
 
-    if st.checkbox('Mostrar Original'):
+    if st.checkbox('Dataset Original'):
         st.dataframe(original, use_container_width=True)
     else:
         st.markdown('El dataset original esta oculto')
 
-    if st.checkbox('Mostrar'):
+    if st.checkbox('Dataset Procesado'):
         st.dataframe(heavy, use_container_width=True)
     else:
-        st.markdown('El dataset esta oculto')
+        st.markdown('El dataset procesado esta oculto')
 
     tab1, tab2, tab3, tab4 = st.tabs(["Puntuación de modelos", "Aprendizaje del modelos", "Distribución de erorres", "Resolución"])
 
@@ -119,4 +119,7 @@ if menu == 'Home':
 
     with tab4:
         st.subheader("Resolución")
+        st.image("../notebooks/img/fin.jpg")
+        st.image("../notebooks/img/cafe.jpg")
         st.image("../notebooks/img/buy.jpg")
+        
